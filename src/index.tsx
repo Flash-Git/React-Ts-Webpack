@@ -18,8 +18,14 @@ const App = (): JSX.Element => {
     setValue("");
   };
 
-  const addTodo = (text: string) => {
+  const addTodo = (text: string): void => {
     const newTodos: ITodo[] = [...todos, { text, complete: false }];
+    setTodos(newTodos);
+  };
+
+  const completeTodo = (index: number): void => {
+    const newTodos: ITodo[] = todos;
+    newTodos[index].complete = !newTodos[index].complete;
     setTodos(newTodos);
   };
 
@@ -36,9 +42,11 @@ const App = (): JSX.Element => {
         <button type="submit">Add</button>
       </form>
       <section>
-        {todos.map((todo: ITodo, index: number) => (
-          <div key={index}>{todo.text}</div>
-        ))}
+        {todos.map(
+          (todo: ITodo, index: number): JSX.Element => (
+            <div key={index}>{todo.text}</div>
+          )
+        )}
       </section>
     </Fragment>
   );
