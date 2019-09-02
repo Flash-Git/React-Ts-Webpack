@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
 
-interface ITodos {
+interface ITodo {
   text: string;
   complete: boolean;
 }
 
 const App = (): JSX.Element => {
   const [value, setValue] = useState<string>("");
-  const [todos, setTodos] = useState<ITodos[]>([]);
+  const [todos, setTodos] = useState<ITodo[]>([]);
 
   type FormElem = React.FormEvent<HTMLFormElement>;
 
@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
   };
 
   const addTodo = (text: string) => {
-    const newTodos: ITodos[] = [...todos, { text, complete: false }];
+    const newTodos: ITodo[] = [...todos, { text, complete: false }];
     setTodos(newTodos);
   };
 
@@ -35,6 +35,11 @@ const App = (): JSX.Element => {
         />
         <button type="submit">Add</button>
       </form>
+      <section>
+        {todos.map((todo: ITodo, index: number) => (
+          <div key={index}>{todo.text}</div>
+        ))}
+      </section>
     </Fragment>
   );
 };
