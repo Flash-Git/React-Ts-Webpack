@@ -24,7 +24,7 @@ const App = (): JSX.Element => {
   };
 
   const completeTodo = (index: number): void => {
-    const newTodos: ITodo[] = todos;
+    const newTodos: ITodo[] = [...todos];
     newTodos[index].complete = !newTodos[index].complete;
     setTodos(newTodos);
   };
@@ -44,7 +44,12 @@ const App = (): JSX.Element => {
       <section>
         {todos.map(
           (todo: ITodo, index: number): JSX.Element => (
-            <div key={index}>{todo.text}</div>
+            <Fragment key={index}>
+              <div>{todo.text}</div>
+              <button type="button" onClick={() => completeTodo(index)}>
+                {todo.complete ? "Incomplete" : "Complete"}
+              </button>
+            </Fragment>
           )
         )}
       </section>
